@@ -27,38 +27,21 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrição</th>
-                <th>Preço</th>
+                <th>Valor</th>
                 <th>Quantidade</th>
             </tr>
         </thead>
         <tbody>
+            {{range .}}
             <tr>
-                <td>Whey Protein</td>
-                <td>O whey protein tem alta concentração de cálcio.</td>
-                <td>59</td>
-                <td>10</td>
+                <td>{{.Nome}}</td>
+                <td>{{.Descricao}}</td>
+                <td>{{.Valor}}</td>
+                <td>{{.Quantidade}}</td>
             </tr>
-            <tr>
-                <td>Creatina Universal</td>
-                <td>A melhor creatina do mercado</td>
-                <td>119</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Albumina</td>
-                <td>Clara do ovo.</td>
-                <td>49</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Omega 3</td>
-                <td>Multivitaminíco</td>
-                <td>32</td>
-                <td>30</td>
-            </tr>
+            {{end}}
         </tbody>
     </table>
 </body>
 </html>
-
 {{end}}
