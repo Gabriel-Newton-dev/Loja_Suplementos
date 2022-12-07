@@ -1,8 +1,12 @@
 package main
 
 import (
+	"database/sql"
+	"log"
 	"net/http"
 	"text/template"
+
+	_ "github.com/lib/pq"
 )
 
 type Produtos struct {
@@ -14,8 +18,19 @@ type Produtos struct {
 
 var temp = template.Must(template.ParseGlob("templates/*.html"))
 
+func conectaComBancoDeDados() *sql.DB {
+	conexao := "user=postgres dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
+	db, err := sql.Open("postgres", conexao)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return db
+}
+
 func main() {
 
+	db := conectaComBancoDeDados()
+	defer db.Close()
 	http.HandleFunc("/", index)
 	http.ListenAndServe(":8000", nil)
 
