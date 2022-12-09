@@ -9,11 +9,11 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Produtos struct {
+type Produto struct {
 	Id         int
 	Nome       string
 	Descricao  string
-	Preco      float64
+	Valor      float64
 	Quantidade int
 }
 
@@ -48,31 +48,31 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// criei essa variavel p, que irá receber apenas 1 produto, eu irei armanezar o que vem do banco de dados.
 	// criei variavel produto para receber o slice do Produto{}
 
-	p := Produtos{}
-	produto := []Produtos{}
+	p := Produto{}
+	produtos := []Produto{}
 
 	// criamos um for para verificar linha a linha, ou seja o selectDeTodosOsProdutos. next, próxima linha.
 	for selectDeTodosOsProdutos.Next() {
 		var id, quantidade int
 		var nome, descricao string
-		var preco float64
+		var valor float64
 
 		// iremos scanear linha a linha, irei guardar em uma variavel de erro, e quero que fique armazenado dentro da memória do meu computador ( &)
-		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &valor, &quantidade)
 		if err != nil {
 			panic(err.Error())
 		}
 
 		p.Nome = nome
 		p.Descricao = descricao
-		p.Preco = preco
+		p.Valor = valor
 		p.Quantidade = quantidade
 
-		produto = append(produto, p)
+		produtos = append(produtos, p)
 
 	}
 
-	temp.ExecuteTemplate(w, "Index", produto)
+	temp.ExecuteTemplate(w, "Index", produtos)
 	defer db.Close()
 }
 
