@@ -10,6 +10,7 @@ import (
 )
 
 type Produtos struct {
+	Id         int
 	Nome       string
 	Descricao  string
 	Valor      float64
@@ -19,7 +20,7 @@ type Produtos struct {
 var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func conectaComBancoDeDados() *sql.DB {
-	conexao := "dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
+	conexao := "user=postgres dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		log.Fatal(err)
@@ -44,7 +45,35 @@ func index(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	temp.ExecuteTemplate(w, "Index", selectDeTodosOsProdutos)
+	// criei essa variavel p, que irá receber apenas 1 produto, eu irei armanezar o que vem do banco de dados.
+	// criei variavel produto para receber o slice do Produto{}
+
+	p := Produto{}
+	produtos := []Produto{}
+
+	// criamos um for para verificar linha a linha, ou seja o selectDeTodosOsProdutos. next, próxima linha.
+	for selectDeTodosOsProdutos.Next() {
+		var id, quantidade int
+		var nome, descricao string
+		var preco float64
+
+		// iremos scanear linha a linha, irei guardar em uma variavel de erro, e quero que fique armazenado dentro da memória do meu computador ( &)
+		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		p.Nome = nome
+		p.Descricao = descricao
+		p.preco = preco
+		p.Quantidade = quantidade
+
+		produtos = append(produtos, p)
+
+	}
+
+	temp.ExecuteTemplate(w, "Index", produtos)
+	defer db.Close()
 }
 
 // Produto := []Produtos{
