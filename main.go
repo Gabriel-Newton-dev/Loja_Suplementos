@@ -48,6 +48,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// criei essa variavel p, que irá receber apenas 1 produto, eu irei armanezar o que vem do banco de dados.
 	// criei variavel produto para receber o slice do Produto{}
 
+	// aqui tem que ser o mesmo nome da Struct
 	p := Produto{}
 	produtos := []Produto{}
 
