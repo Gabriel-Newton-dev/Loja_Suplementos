@@ -19,7 +19,7 @@ type Produtos struct {
 var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func conectaComBancoDeDados() *sql.DB {
-	conexao := "user=postgres dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
+	conexao := "dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		log.Fatal(err)
@@ -37,13 +37,21 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	Produto := []Produtos{
-		{"Creatina Universal", "A melhor creatina do mercado", 119.89, 10},
-		{"HGH", "Otimizador de hormonio GH", 350.99, 5},
-		{"Whey Protein", "O whey protein tem alta concentração de cálcio", 59.99, 10},
-		{"Albumina", "Clara de ovo", 49.99, 50},
-		{"Ômega 3", "Multivitaminíco", 32.99, 30},
-		{"Natubolic", "Suplemento", 91.99, 4},
+	db := conectaComBancoDeDados()
+
+	selectDeTodosOsProdutos, err := db.Query("select * from public.produtos")
+	if err != nil {
+		panic(err.Error())
 	}
-	temp.ExecuteTemplate(w, "Index", Produto)
+
+	temp.ExecuteTemplate(w, "Index", selectDeTodosOsProdutos)
 }
+
+// Produto := []Produtos{
+// 	{"Creatina Universal", "A melhor creatina do mercado", 119.89, 10},
+// 	{"HGH", "Otimizador de hormonio GH", 350.99, 5},
+// 	{"Whey Protein", "O whey protein tem alta concentração de cálcio", 59.99, 10},
+// 	{"Albumina", "Clara de ovo", 49.99, 50},
+// 	{"Ômega 3", "Multivitaminíco", 32.99, 30},
+// 	{"Natubolic", "Suplemento", 91.99, 4},
+// }
