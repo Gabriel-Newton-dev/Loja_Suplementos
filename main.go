@@ -19,7 +19,7 @@ type Produtos struct {
 var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func conectaComBancoDeDados() *sql.DB {
-	conexao := "dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
+	conexao := "user=postgres dbname=loja_suplementos password=G1ogo@2060 host=localhost sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		log.Fatal(err)
