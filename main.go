@@ -13,7 +13,7 @@ type Produtos struct {
 	Id         int
 	Nome       string
 	Descricao  string
-	Valor      float64
+	Preco      float64
 	Quantidade int
 }
 
@@ -48,8 +48,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// criei essa variavel p, que irá receber apenas 1 produto, eu irei armanezar o que vem do banco de dados.
 	// criei variavel produto para receber o slice do Produto{}
 
-	p := Produto{}
-	produtos := []Produto{}
+	p := Produtos{}
+	produto := []Produtos{}
 
 	// criamos um for para verificar linha a linha, ou seja o selectDeTodosOsProdutos. next, próxima linha.
 	for selectDeTodosOsProdutos.Next() {
@@ -65,14 +65,14 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 		p.Nome = nome
 		p.Descricao = descricao
-		p.preco = preco
+		p.Preco = preco
 		p.Quantidade = quantidade
 
-		produtos = append(produtos, p)
+		produto = append(produto, p)
 
 	}
 
-	temp.ExecuteTemplate(w, "Index", produtos)
+	temp.ExecuteTemplate(w, "Index", produto)
 	defer db.Close()
 }
 
