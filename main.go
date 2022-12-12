@@ -17,7 +17,7 @@ var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func main() {
 
-	db := conectaComBancoDeDados()
+	db := db.conectaComBancoDeDados()
 	defer db.Close()
 	http.HandleFunc("/", index)
 	http.ListenAndServe(":8000", nil)
@@ -25,7 +25,7 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	db := conectaComBancoDeDados()
+	db := db.conectaComBancoDeDados()
 
 	selectDeTodosOsProdutos, err := db.Query("select * from public.produtos")
 	if err != nil {
