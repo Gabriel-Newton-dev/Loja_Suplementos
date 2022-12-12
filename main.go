@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Produtos struct {
+type Produto struct {
 	Id         int
 	Nome       string
 	Descricao  string
@@ -48,6 +48,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// criei essa variavel p, que irá receber apenas 1 produto, eu irei armanezar o que vem do banco de dados.
 	// criei variavel produto para receber o slice do Produto{}
 
+	// aqui tem que ser o mesmo nome da Struct
 	p := Produto{}
 	produtos := []Produto{}
 
@@ -55,17 +56,17 @@ func index(w http.ResponseWriter, r *http.Request) {
 	for selectDeTodosOsProdutos.Next() {
 		var id, quantidade int
 		var nome, descricao string
-		var preco float64
+		var valor float64
 
 		// iremos scanear linha a linha, irei guardar em uma variavel de erro, e quero que fique armazenado dentro da memória do meu computador ( &)
-		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &valor, &quantidade)
 		if err != nil {
 			panic(err.Error())
 		}
 
 		p.Nome = nome
 		p.Descricao = descricao
-		p.preco = preco
+		p.Valor = valor
 		p.Quantidade = quantidade
 
 		produtos = append(produtos, p)
@@ -75,12 +76,3 @@ func index(w http.ResponseWriter, r *http.Request) {
 	temp.ExecuteTemplate(w, "Index", produtos)
 	defer db.Close()
 }
-
-// Produto := []Produtos{
-// 	{"Creatina Universal", "A melhor creatina do mercado", 119.89, 10},
-// 	{"HGH", "Otimizador de hormonio GH", 350.99, 5},
-// 	{"Whey Protein", "O whey protein tem alta concentração de cálcio", 59.99, 10},
-// 	{"Albumina", "Clara de ovo", 49.99, 50},
-// 	{"Ômega 3", "Multivitaminíco", 32.99, 30},
-// 	{"Natubolic", "Suplemento", 91.99, 4},
-// }
