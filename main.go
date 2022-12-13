@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/Gabriel-Newton-dev/models"
+	"github.com/Gabriel-Newton-dev/Loja_Suplementos/models"
 )
 
 var temp = template.Must(template.ParseGlob("templates/*.html"))
