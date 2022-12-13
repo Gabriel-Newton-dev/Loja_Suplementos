@@ -6,7 +6,7 @@ type Produto struct {
 	Id         int
 	Nome       string
 	Descricao  string
-	Preco      float64
+	Valor      float64
 	Quantidade int
 }
 
@@ -29,23 +29,22 @@ func BuscaTodosOsProdutos() []Produto {
 	for selectDeTodosOsProdutos.Next() {
 		var id, quantidade int
 		var nome, descricao string
-		var preco float64
+		var valor float64
 
 		// iremos scanear linha a linha, irei guardar em uma variavel de erro, e quero que fique armazenado dentro da memória do meu computador ( &)
-		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &valor, &quantidade)
 		if err != nil {
 			panic(err.Error())
 		}
 
 		p.Nome = nome
 		p.Descricao = descricao
-		p.Preco = preco
+		p.Valor = valor
 		p.Quantidade = quantidade
 
 		produtos = append(produtos, p)
 
 	}
-	return produtos
 	defer db.Close()
-
+	return produtos
 }

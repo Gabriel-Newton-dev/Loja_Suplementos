@@ -1,10 +1,9 @@
 package main
 
 import (
+	"modulos/models"
 	"net/http"
 	"text/template"
-
-	"modulos/models"
 )
 
 var temp = template.Must(template.ParseGlob("templates/*.html"))
@@ -17,4 +16,5 @@ func main() {
 func index(w http.ResponseWriter, r *http.Request) {
 	todosOsProdutos := models.BuscaTodosOsProdutos
 	temp.ExecuteTemplate(w, "Index", todosOsProdutos)
+
 }
