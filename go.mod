@@ -1,4 +1,4 @@
-module modulos
+module github.com/Gabriel-Newton-dev
 
 go 1.18
 

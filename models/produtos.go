@@ -1,6 +1,6 @@
 package models
 
-import "modulos/db"
+import "github.com/Gabriel-Newton-dev/db"
 
 type Produto struct {
 	Id         int
