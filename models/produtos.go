@@ -1,6 +1,10 @@
 package models
 
-import "github.com/Gabriel-Newton-dev/db"
+import (
+	"log"
+
+	"github.com/Gabriel-Newton-dev/db"
+)
 
 type Produto struct {
 	Id         int
@@ -49,7 +53,16 @@ func BuscaTodosOsProdutos() []Produto {
 	return produtos
 }
 
-func CriarNovoProduto(nome, descricao string, preco float64, quantidade int) {
+func CriarNovoProduto(nome, descricao string, valor float64, quantidade int) {
 	db := db.ConectaComBancoDeDados()
+
+	insereDadosNoBanco, err := db.Prepare("insert into produtos(nome, descricao, valor, quantidade) values($1, $2, $3, $4)")
+	if err != nil {
+		log.Println("Erro na inserção no banco de dados, função inserir", nil)
+	}
+
+	insereDadosNoBanco.Exec(nome, descricao, valor, quantidade)
+
+	defer db.Close()
 
 }
