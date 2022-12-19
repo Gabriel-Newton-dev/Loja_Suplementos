@@ -6,7 +6,7 @@ Irei Desenvolver uma Aplicação Web apenas utilizando Golang. Vou desenvolver u
 
 Vamos ser capaz de incluir, editar e deletar os produtos. 
 
-Vou desenvolver tudo isso utilizando nenhum framework, apenas a linguagem Go, todas as nossas tabelas, nossos layouts, as nossas páginas HTML, os nossos códigos do servidor, vamos fazer utilizando a biblioteca padrão do Go.
+Vou desenvolver tudo isso utilizando apenas a linguagem Go, todas as nossas tabelas, nossos layouts, as nossas páginas HTML, os nossos códigos do servidor, vamos fazer utilizando a biblioteca padrão do Go.
 
 Vou importar umas outras bibliotecas também para criar essas funcionalidades para nosso projeto, vamos modularizar nosso projeto na convenção do MVC.
 
