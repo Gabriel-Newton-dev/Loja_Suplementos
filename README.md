@@ -2,7 +2,7 @@
 
 
 
-Irei Desenvolver uma Aplicação Web apenas utilizando Golang. Vou desenvolver uma Loja simples de suplementos onde eu vou ser capaz de criar produtos e salvar suas informações esses produtos no banco de dados, simulando uma loja Online.
+Irei Desenvolver uma Aplicação Web apenas utilizando Golang. Vou desenvolver uma Loja simples de suplementos onde eu vou ser capaz de criar produtos e salvar suas informações no banco de dados, simulando uma loja Online.
 
 Vamos ser capaz de incluir, editar e deletar os produtos. 
 
