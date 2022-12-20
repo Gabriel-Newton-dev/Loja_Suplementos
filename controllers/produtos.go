@@ -42,3 +42,9 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/", 301)
 }
+
+func DeletarNoBanco(w http.ResponseWriter, r *http.Request) {
+	idDoProduto := r.URL.Query().Get("id")
+	models.DeletarProduto(idDoProduto)
+	http.Redirect(w, r, "/", 301)
+}
