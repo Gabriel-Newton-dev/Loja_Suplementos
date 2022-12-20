@@ -40,8 +40,8 @@
                 <td>{{.Valor}}</td>
                 <td>{{.Quantidade}}</td>
                 <td>
-                    <a href="/delete?id={{.Id}}" class=" btn btn-danger">DELETAR</a>
                 </td>
+                <td><button onclick="onDelete('{{.Id}}')" class="btn btn-danger">DELETAR</td>
             </tr>
             {{end}}
         </tbody>
@@ -51,5 +51,13 @@
         <a href="/new" class="btn btn-primary mb-2">Criar Novo Produto</a>
     </div>
 </body>
+<script>
+    function onDelete(id){
+        let resposta = confirm("Tem certeza que deseja deletar esse produto? ")
+        if (resposta){
+            window.location = "/delete?id=" + id
+        }
+    }
+</script>
 </html>
 {{end}}
