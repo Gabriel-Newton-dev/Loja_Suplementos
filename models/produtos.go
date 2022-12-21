@@ -67,3 +67,16 @@ func CriarNovoProduto(nome, descricao string, preco float64, quantidade int) {
 	defer db.Close()
 
 }
+
+func DeletarProduto(id string) {
+	db := db.ConectaComBancoDeDados()
+
+	// delete from(dos) produtos(tabela) where(onde)
+	deletarOPrudo, err := db.Prepare("delete from produtos where id=$1")
+	if err != nil {
+		log.Println("Erro na função deletar produtos.")
+	}
+
+	deletarOPrudo.Exec(id)
+	defer db.Close()
+}
