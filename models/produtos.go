@@ -41,6 +41,7 @@ func BuscaTodosOsProdutos() []Produto {
 			panic(err.Error())
 		}
 
+		p.Id = id
 		p.Nome = nome
 		p.Descricao = descricao
 		p.Valor = valor
