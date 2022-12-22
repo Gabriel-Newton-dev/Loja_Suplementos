@@ -4,8 +4,6 @@
 
 Irei Desenvolver uma Aplicação Web apenas utilizando Golang. Vou desenvolver uma Loja simples de suplementos onde eu vou ser capaz de criar, editar e deletar produtos se comunicando diretamenta com  nosso banco de dados, sendo o admin de uma loja Online.
 
-Vamos ser capaz de incluir, editar e deletar os produtos. 
-
 Vou desenvolver tudo isso utilizando apenas a linguagem Go, todas as nossas tabelas, nossos layouts, as nossas páginas HTML, os nossos códigos do servidor, vamos fazer utilizando a biblioteca padrão do Go.
 
 Vou importar umas outras bibliotecas também para criar essas funcionalidades para nosso projeto, vamos modularizar nosso projeto na convenção do MVC.
